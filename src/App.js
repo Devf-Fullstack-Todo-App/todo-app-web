@@ -2,7 +2,16 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [todo, setTodo] = useState("");
+  const [todo, setTodo] = useState('');
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [loader, setLoader] = useState(false);
 
   const handleSubmitTask = () => {
     const body = {
@@ -34,48 +43,82 @@ function App() {
   // 4. Utilizar ese token para crear una tarea de ese mismo usuario
   // 4.1 - Necesitamos un endpoint "limitado" para ese usuario
   
+  const onRegisterHandler = () => {
+    setLoader(true)
+    console.log({
+      email,
+      password,
+      name,
+      phone
+    })
+    if (!email || !password || !name || !phone) {
+      setError({ message: 'Se necesitan todos los campos' })
+      setLoader(false)
+    }
+
+    setTimeout(() => {
+      setSuccess({ message: 'Usuario registrado con exito'});
+      setLoader(false);
+    }, 3000)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <div className="SignUp">
 
           <form className="SignUp-form">
+
             <h1 className="SignUp-title">Registrate</h1>
+
             <input
             className="SignUp-input"
             placeholder="Ingresa tu email"
             type="email"
-            onChange={() => console.log("on mail change")}
+            onChange={(e) => {
+              setError(null)
+              setEmail(e.target.value)
+            }}
             />
 
             <input
             className="SignUp-input"
             placeholder="Ingresa tu password"
             type="password"
-            onChange={() => console.log("on password change")}
+            onChange={(e) => {
+              setError(null)
+              setPassword(e.target.value)
+            }}
             />
 
             <input
             className="SignUp-input"
             placeholder="Ingresa tu nombre"
             type="name"
-            onChange={() => console.log("on name change")}
+            onChange={(e) => {
+              setError(null)
+              setName(e.target.value)
+            }}
             />
 
             <input
             className="SignUp-input"
             placeholder="Ingresa tu telefono"
             type="phone"
-            onChange={() => console.log("on phone change")}
+            onChange={(e) => {
+              setError(null)
+              setPhone(e.target.value)
+            }}
             />
-
 
             <button
             type="button"
             className="SignUp-bottom"
-            onClick={() => console.log("onRegister")}>
-              Registrarse
-              </button>
+            onClick={onRegisterHandler}
+            >{loader ? 'Cargando...' : 'Registrarse'}</button>
+            {error && <p className="SignUp-error">{error.message}</p>}
+            {success && <p className="SignUp-success">{success.message}</p>}
+
           </form>
 
           {/* <input 

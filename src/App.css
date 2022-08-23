@@ -77,3 +77,13 @@
   border-color: black;
   border-width: 1px;
 }
+
+.SignUp .SignUp-error {
+  color: red;
+  font-size: 0.75rem;
+}
+
+.SignUp .SignUp-success {
+  color: green;
+  font-size: 0.75rem;
+}
