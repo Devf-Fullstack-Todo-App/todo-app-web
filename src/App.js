@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import './App.css';
 import SignUp from './components/SignUp';
-import AuthForm from './components/SignUp';
 
 function App() {
   const [todo, setTodo] = useState('')
