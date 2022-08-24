@@ -1,0 +1,49 @@
+.SignUp {
+  background-color: white;
+  border-radius: 5px;
+  padding: 16px;
+}
+
+.SignUp .SignUp-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.SignUp .SignUp-title {
+  color: black;
+  font-weight: bold;
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 32px;
+}
+
+.SignUp .SignUp-input {
+  margin-bottom: 16px;
+  padding: 8px;
+  border-radius: 5px;
+  min-width: 250px;
+  border-color: black;
+  border-width: 1px;
+}
+
+.SignUp .SignUp-input:last-of-type {
+  margin-bottom: 32px;
+}
+
+.SignUp .SignUp-button { 
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 5px;
+  border-color: black;
+  border-width: 1px;
+}
+
+.SignUp .SignUp-error { 
+  color: red;
+  font-size: 0.75rem;
+}
+
+.SignUp .SignUp-success { 
+  color: green;
+  font-size: 0.75rem;
+}

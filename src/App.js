@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 
-import AuthForm from './components/AuthForm';
+import SignUp from './components/SignUp';
 
 function App() {
   const [todo, setTodo] = useState('');
@@ -40,7 +40,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-          <AuthForm />
+          <SignUp />
           {/* <input 
             value={todo}
             type="text" 

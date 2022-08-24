@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
 import api from '../lib/api';
+import './SignUp.css';
 
-function AuthForm(props) {
+function SignUp(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -90,4 +91,4 @@ function AuthForm(props) {
   )
 }
 
-export default AuthForm;
+export default SignUp;
