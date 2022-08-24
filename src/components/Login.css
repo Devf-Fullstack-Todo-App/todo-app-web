@@ -1,24 +1,24 @@
-.SignUp {
+.Login {
   background-color: white;
   border-radius: 5px;
-  padding: 16px;
   margin: 16px;
+  padding: 16px 16px;
 }
 
-.SignUp-form {
+.Login-form {
   display: flex;
   flex-direction: column;
 }
 
-.SignUp .SignUp-title {
+.Login .Login-title {
   color: black;
   font-weight: bold;
   font-size: 24px;
   margin-top: 0;
-  margin-bottom: 32px;
+  margin-bottom: 64px;
 }
 
-.SignUp .SignUp-input {
+.Login .Login-input {
   margin-bottom: 16px;
   padding: 8px;
   border-radius: 5px;
@@ -27,11 +27,15 @@
   border-width: 1px;
 }
 
-.SignUp .SignUp-input:last-of-type {
-  margin-bottom: 32px;
+.Login .Login-input:first-of-type {
+  margin-top: 48px;
 }
 
-.SignUp .SignUp-bottom {
+.Login .Login-input:last-of-type {
+  margin-bottom: 48px;
+}
+
+.Login .Login-bottom {
   cursor: pointer;
   padding: 8px;
   border-radius: 5px;
@@ -39,12 +43,12 @@
   border-width: 1px;
 }
 
-.SignUp .SignUp-error {
+.Login .Login-error {
   color: red;
   font-size: 0.75rem;
 }
 
-.SignUp .SignUp-success {
+.Login .Login-success {
   color: green;
   font-size: 0.75rem;
 }
