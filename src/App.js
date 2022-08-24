@@ -2,32 +2,10 @@ import { useState } from 'react';
 import './App.css';
 
 import SignUp from './components/SignUp';
+import CreateTodo from './components/CreateTodo';
 
 function App() {
-  const [todo, setTodo] = useState('');
-
-  const handleSubmitTask = () => {
-    const body = {
-      todo: todo
-    }
-  
-    const config = {
-        method: 'POST', 
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-    }
-  
-    fetch('http://localhost:8000/todos', config)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setTodo('');
-        })
-        .catch((err) => console.error(err));
-  }
-
+  const [userData, setUserData] = useState(null)
   console.log('Se renderiza')
 
   // 1. Obtener info del usuario 
@@ -36,18 +14,11 @@ function App() {
   // 4. Utilizar ese token para crear una tarea de ese mismo usuario
   // 4.1 - Necesitamos un endpoint "limitado" para ese usuario
 
-
   return (
     <div className="App">
       <header className="App-header">
-          <SignUp />
-          {/* <input 
-            value={todo}
-            type="text" 
-            placeholder='Ingresa la tarea' 
-            onChange={(e) => setTodo(e.target.value)}
-          />
-          <button type="button" onClick={handleSubmitTask}>Agregar tarea</button> */}
+        {!userData && <SignUp onSignUp={(data) => setUserData(data)}/>}
+        {userData && <CreateTodo token={userData.token} userId={userData.user.id} />}
       </header>
     </div>
   );

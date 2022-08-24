@@ -32,6 +32,7 @@ function SignUp(props) {
       console.log(data);
       setSuccess({ message: 'Usuario registrado con éxito' });
       setLoader(false);
+      props.onSignUp(data);
     })
     .catch(err => {
       console.error(err)
