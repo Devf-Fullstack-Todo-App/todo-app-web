@@ -18,8 +18,7 @@ function createUser({ email, password, name, phone }) {
   .then(res => res.json())
 }
 
-function createTodo({ todo, userId, userToken }) {
-  console.log({ userId })
+function createTodo({ todo, userToken }) {
   const body = {
     todo: todo
   }
@@ -33,7 +32,7 @@ function createTodo({ todo, userId, userToken }) {
       body: JSON.stringify(body)
   }
   
-  return fetch(`http://localhost:8000/users/${userId}/todos`, config)
+  return fetch(`http://localhost:8000/todos`, config)
   .then((res) => res.json())
 }
 
