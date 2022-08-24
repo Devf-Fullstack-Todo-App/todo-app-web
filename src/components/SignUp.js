@@ -10,8 +10,9 @@ function SignUp(props) {
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [loader, setLoader] = useState(false);
+  const [loader, setLoader] = useState(false)
 
+  
   const onRegisterHandler = () => {
     setLoader(true)
     console.log({ 
@@ -25,22 +26,17 @@ function SignUp(props) {
       setLoader(false)
     }
 
-    api.users.create({ email, password, phone, name })
-    .then((res) => res.json())
-    .then((data) => {
+    api.users.create({ email, password, name, phone })
+    .then(data => {
       console.log(data);
       setSuccess({ message: 'Usuario registrado con éxito' });
       setLoader(false);
+      props.onSignUp(data);
     })
-    .catch((err) => {
+    .catch(err => {
       console.error(err)
       setLoader(false);
     })
-
-    setTimeout(() => {
-      setSuccess({ message: 'Usuario registrado con éxito' });
-      setLoader(false)
-    }, 3000) 
   }
 
   return (

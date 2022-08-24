@@ -18,9 +18,31 @@ async function createUser({ email, password, phone, name }) {
   .then(res => res.json())
 }
 
+function createTodo({ todo, userToken }) {
+  const body = {
+    todo: todo
+  }
+
+  const config = {
+      method: 'POST', 
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${userToken}`
+      },
+      body: JSON.stringify(body)
+  }
+
+  return fetch(`http://localhost:8000/todos`, config)
+  .then(res => res.json())
+}
+
 const api = {
   users: {
     create: createUser
+  },
+  todos: {
+    create: createTodo
   }
 }
+
 export default api;
