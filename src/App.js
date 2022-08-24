@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
+import api from './lib/api';
 import SignUp from './components/SignUp';
+import Login from './components/Login';
 import CreateTodo from './components/CreateTodo';
 import './App.css';
-import api from './lib/api';
-import Login from './components/Login';
 
 
 function Todo (props) {
@@ -50,14 +50,21 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+
       {!userData && <SignUp onSignUp={(data) => setUserData(data)}/>}
-      {!userData && <Login onLogin={(data) => setUserData(data)}/>}
+
+      {!userData &&
+        <Login onLogin={(data) => setUserData(data)}
+      />}
+
       {userData &&
         <CreateTodo
         token={userData.token}
         onCreateTodo={() => fetchTodos()}
-        />}
+      />}
+
       {userData && <TodoList todos={todos} />}
+
       </header>
     </div>
   );
