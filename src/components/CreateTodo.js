@@ -6,7 +6,6 @@ function CreateTodo(props) {
   const [todo, setTodo] = useState('');
 
   const handleSubmitTask = () => {
-   
     api.todos.create({ 
       todo, 
       userToken: props.token, 
@@ -14,6 +13,7 @@ function CreateTodo(props) {
     }).then((data) => {
         console.log(data);
       setTodo('');
+      props.onCreateTodo()
     })
     .catch((err) => console.error(err));
 }

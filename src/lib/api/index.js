@@ -36,12 +36,25 @@ function createTodo({ todo, userToken }) {
   .then((res) => res.json())
 }
 
+function fetchTodos(token) {
+  const config = {
+      method: 'GET', 
+      headers: {
+          'Authorization': `Bearer ${token}`
+      }
+  }
+  
+  return fetch(`http://localhost:8000/todos`, config)
+  .then((res) => res.json())
+}
+
 const api = {
   users: {
     create: createUser
   },
   todos: {
-    create: createTodo
+    create: createTodo,
+    getAll: fetchTodos,
   }
 }
 

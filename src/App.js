@@ -1,11 +1,43 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 import SignUp from './components/SignUp';
 import CreateTodo from './components/CreateTodo';
+import api from './lib/api';
+
+function Todo(props) {
+  return (
+    <li>{props.children}</li>
+  )
+}
+
+function TodoList({ todos }) {
+  return (
+    <div>
+      <ul>
+        {todos.map((todo) => <Todo key={todo.id}>{todo.todo}</Todo>)}
+      </ul>
+    </div>
+  )
+}
 
 function App() {
   const [userData, setUserData] = useState(null)
+
+  const [todos, setTodos] = useState([]);
+
+  function fetchTodos() {
+    api.todos.getAll(userData.token)
+    .then(data => setTodos(data))
+    .catch((err) => console.error(err))
+  }
+
+  useEffect(() => {
+    if(userData?.token) {
+      fetchTodos();
+    }
+  }, [userData])
+
   console.log('Se renderiza')
 
   // 1. Obtener info del usuario 
@@ -18,7 +50,14 @@ function App() {
     <div className="App">
       <header className="App-header">
         {!userData && <SignUp onSignUp={(data) => setUserData(data)}/>}
-        {userData && <CreateTodo token={userData.token} userId={userData.user.id} />}
+        {userData && (
+          <CreateTodo 
+            token={userData.token}
+            onCreateTodo={() => fetchTodos()}
+          />
+          )
+        }
+        {userData && <TodoList todos={todos} />}
       </header>
     </div>
   );
