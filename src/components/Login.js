@@ -12,10 +12,6 @@ function Login(props) {
   
   const onLoginHandler = () => {
     setLoader(true)
-    console.log({
-      email,
-      password,
-    })
     if (!email || !password) {
       setError({ message: 'Se necesitan todos los campos' })
       setLoader(false)
