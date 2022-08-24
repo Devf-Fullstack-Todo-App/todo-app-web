@@ -56,10 +56,32 @@ function App() {
       setLoader(false)
     }
 
-    setTimeout(() => {
+    const body = {
+      email,
+      password,
+      phone,
+      name
+    }
+  
+    const config = {
+      method: 'POST', 
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    }
+  
+    fetch('http://localhost:8000/users', config)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
       setSuccess({ message: 'Usuario registrado con éxito' });
-      setLoader(false)
-    }, 3000) 
+      setLoader(false);
+    })
+    .catch(err => {
+      console.error(err)
+      setLoader(false);
+    })
   }
 
   return (
