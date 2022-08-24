@@ -19,6 +19,7 @@ function createUser({ email, password, name, phone }) {
 }
 
 function createTodo({ todo, userId, userToken }) {
+  console.log({ userId })
   const body = {
     todo: todo
   }
