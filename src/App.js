@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Routes, Route } from "react-router-dom";
 import './App.css';
 
 import SignUp from './components/SignUp';
@@ -24,7 +25,7 @@ function TodoList({ todos }) {
 
 function App() {
   const [userData, setUserData] = useState(null);
-  const [onSignIn, setOnSignIn] = useState(false);
+
   const [todos, setTodos] = useState([]);
 
   function fetchTodos() {
@@ -50,18 +51,33 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {!userData && !onSignIn && (
+        <Routes>
+          <Route 
+            path="/registro" 
+            element={          
+              <SignUp 
+                onSignUp={(data) => setUserData(data)} 
+              />
+            } 
+          />
+          <Route path="/inicio" element={
+            <SignIn 
+              onSignIn={(data) => setUserData(data)}
+            />}   
+          />
+        </Routes>
+        {/* {!userData && !onSignIn && (
           <SignUp 
             onSignUp={(data) => setUserData(data)} 
             onNavigateToSignIn={() => setOnSignIn(true)} 
           />
-        )}
-        {!userData && onSignIn && (
+        )} */}
+        {/* {!userData && onSignIn && (
           <SignIn 
             onSignIn={(data) => setUserData(data)} 
             onNavigateToSignUp={() => setOnSignIn(false)} 
           />
-        )}
+        )} */}
         {userData && (
           <CreateTodo 
             token={userData.token}

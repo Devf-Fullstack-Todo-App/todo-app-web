@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import api from '../lib/api';
 import './SignUp.css';
@@ -82,7 +83,7 @@ function SignUp(props) {
         {loader ? 'Cargando...' : 'Registrarse'}</button>
         {error && <p className="SignUp-error">{error.message}</p>}
         {success && <p className="SignUp-success">{success.message}</p>}
-        <button type="button" onClick={props.onNavigateToSignIn}>Ya tienes cuenta? Inicia sesión</button>
+        <Link to="/inicio">Ya tienes cuenta? Inicia sesión</Link>
       </form>
     </div>
   )
