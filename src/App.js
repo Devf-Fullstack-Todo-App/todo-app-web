@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import './App.css';
 
 import SignUp from './components/SignUp';
@@ -25,13 +25,19 @@ function TodoList({ todos }) {
 
 function App() {
   const [userData, setUserData] = useState(null);
-
   const [todos, setTodos] = useState([]);
+
+  let navigate = useNavigate();
 
   function fetchTodos() {
     api.todos.getAll(userData.token)
     .then(data => setTodos(data))
     .catch((err) => console.error(err))
+  }
+
+  function navigateToList(data) {
+    setUserData(data)
+    navigate('/todos')
   }
 
   useEffect(() => {
@@ -52,40 +58,22 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Routes>
-          <Route 
-            path="/registro" 
-            element={          
-              <SignUp 
-                onSignUp={(data) => setUserData(data)} 
-              />
-            } 
-          />
-          <Route path="/inicio" element={
-            <SignIn 
-              onSignIn={(data) => setUserData(data)}
-            />}   
-          />
+          <Route path="/" element={<Navigate to="/todos" replace />} />
+          <Route path="/registro" element={<SignUp onSignUp={navigateToList} />} />
+          <Route path="/inicio" element={<SignIn onSignIn={navigateToList}/>} />
+          <Route path="/todos" element={ userData ? (
+              <>
+                <CreateTodo 
+                  token={userData.token}
+                  onCreateTodo={() => fetchTodos()}
+                />
+                <TodoList todos={todos} />
+              </>
+            ) : (
+              <Navigate to="/inicio" replace />
+            )
+          } />
         </Routes>
-        {/* {!userData && !onSignIn && (
-          <SignUp 
-            onSignUp={(data) => setUserData(data)} 
-            onNavigateToSignIn={() => setOnSignIn(true)} 
-          />
-        )} */}
-        {/* {!userData && onSignIn && (
-          <SignIn 
-            onSignIn={(data) => setUserData(data)} 
-            onNavigateToSignUp={() => setOnSignIn(false)} 
-          />
-        )} */}
-        {userData && (
-          <CreateTodo 
-            token={userData.token}
-            onCreateTodo={() => fetchTodos()}
-          />
-          )
-        }
-        {userData && <TodoList todos={todos} />}
       </header>
     </div>
   );
