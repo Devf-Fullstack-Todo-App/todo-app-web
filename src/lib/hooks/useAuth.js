@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 function useAuth() {
   const [token, setTokenState] = useState(localStorage.getItem('tk'))
 
-  const setToken =(_token) => {
+  const setToken = (_token) => {
     if (!_token) {
       localStorage.removeItem('tk');
-    } else {
+    } else { 
       localStorage.setItem('tk', _token);
     }
-    setTokenState(_token);
+    setTokenState(_token)
   }
 
   return [token, setToken]

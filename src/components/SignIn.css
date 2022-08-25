@@ -1,11 +1,10 @@
 .SignIn {
   background-color: white;
   border-radius: 5px;
-  margin: 16px;
-  padding: 16px 16px;
+  padding: 16px;
 }
 
-.SignIn-form {
+.SignIn .SignIn-form {
   display: flex;
   flex-direction: column;
 }
@@ -15,7 +14,7 @@
   font-weight: bold;
   font-size: 24px;
   margin-top: 0;
-  margin-bottom: 64px;
+  margin-bottom: 32px;
 }
 
 .SignIn .SignIn-input {
@@ -27,15 +26,11 @@
   border-width: 1px;
 }
 
-.SignIn .SignIn-input:first-of-type {
-  margin-top: 48px;
-}
-
 .SignIn .SignIn-input:last-of-type {
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 
-.SignIn .SignIn-button {
+.SignIn .SignIn-button { 
   cursor: pointer;
   padding: 8px;
   border-radius: 5px;
@@ -44,12 +39,12 @@
   margin-bottom: 1rem;
 }
 
-.SignIn .SignIn-error {
+.SignIn .SignIn-error { 
   color: red;
   font-size: 0.75rem;
 }
 
-.SignIn .SignIn-success {
+.SignIn .SignIn-success { 
   color: green;
   font-size: 0.75rem;
 }

@@ -10,7 +10,7 @@ function SignIn(props) {
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [loader, setLoader] = useState(false);
+  const [loader, setLoader] = useState(false)
 
   
   const onRegisterHandler = () => {
@@ -22,7 +22,6 @@ function SignIn(props) {
 
     api.users.login({ email, password})
     .then(data => {
-      console.log(data);
       setSuccess({ message: 'Usuario inició sesión con éxito' });
       setLoader(false);
       props.onSignIn(data);
