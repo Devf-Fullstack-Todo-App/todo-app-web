@@ -2,10 +2,9 @@
   background-color: white;
   border-radius: 5px;
   padding: 16px;
-  margin: 16px;
 }
 
-.SignUp-form {
+.SignUp .SignUp-form {
   display: flex;
   flex-direction: column;
 }
@@ -31,7 +30,7 @@
   margin-bottom: 32px;
 }
 
-.SignUp .SignUp-bottom {
+.SignUp .SignUp-button { 
   cursor: pointer;
   padding: 8px;
   border-radius: 5px;
@@ -39,12 +38,12 @@
   border-width: 1px;
 }
 
-.SignUp .SignUp-error {
+.SignUp .SignUp-error { 
   color: red;
   font-size: 0.75rem;
 }
 
-.SignUp .SignUp-success {
+.SignUp .SignUp-success { 
   color: green;
   font-size: 0.75rem;
 }

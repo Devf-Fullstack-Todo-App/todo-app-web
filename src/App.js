@@ -47,6 +47,12 @@ function App() {
   // 4. Utilizar ese token para crear una tarea de ese mismo usuario
   // 4.1 - Necesitamos un endpoint "limitado" para ese usuario
 
+  // 1. Obtener info del usuario 
+  // 2. Registrar al usuario
+  // 3. Recibir respuesta y guardar el token
+  // 4. Utilizar ese token para crear una tarea de ese mismo usuario
+  // 4.1 - Necesitamos un endpoint "limitado" para ese usuario
+
   return (
     <div className="App">
       <header className="App-header">
