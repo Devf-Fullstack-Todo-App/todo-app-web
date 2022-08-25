@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import api from "../lib/api";
-import './SignUp.css'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import api from '../lib/api';
+import './SignUp.css';
 
 function SignUp(props) {
   const [email, setEmail] = useState('');
@@ -10,17 +12,11 @@ function SignUp(props) {
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
 
   
   const onRegisterHandler = () => {
     setLoader(true)
-    console.log({ 
-      email,
-      password,
-      name,
-      phone
-    })
     if (!email || !password || !name || !phone) {
       setError({ message: 'Se necesitan todos campos'})
       setLoader(false)
@@ -87,15 +83,14 @@ function SignUp(props) {
       />
 
       <button
-        type="button"
-        className="SignUp-button"
-        onClick={onRegisterHandler}
+      type="button"
+      className="SignUp-button"
+      onClick={onRegisterHandler}
       >
-        {loader ? 'Cargando...' : 'Registrarse'}
-      </button>
-
+      {loader ? 'Cargando...' : 'Registrarse'}</button>
       {error && <p className="SignUp-error">{error.message}</p>}
       {success && <p className="SignUp-success">{success.message}</p>}
+      <Link to="/inicio">Ya tienes cuenta? Inicia sesión</Link>
 
     </form>
 

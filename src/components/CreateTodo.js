@@ -6,13 +6,11 @@ function CreateTodo(props) {
   const [todo, setTodo] = useState('');
 
   const handleSubmitTask = () => {
-
     api.todos.create({ 
       todo, 
       userToken: props.token, 
       userId: props.userId 
     }).then((data) => {
-        console.log(data);
       setTodo('');
       props.onCreateTodo()
     })

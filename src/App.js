@@ -1,19 +1,22 @@
 import { useEffect, useState } from 'react';
-import api from './lib/api';
-import SignUp from './components/SignUp';
-import Login from './components/Login';
-import CreateTodo from './components/CreateTodo';
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import './App.css';
 
+import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
+import CreateTodo from './components/CreateTodo';
+import Navbar from './components/Navbar';
 
-function Todo (props) {
+import api from './lib/api';
+import useAuth from './lib/hooks/useAuth';
+
+function Todo(props) {
   return (
     <li>{props.children}</li>
   )
 }
 
 function TodoList({ todos }) {
-    
   return (
     <div>
       <ul>
@@ -24,20 +27,27 @@ function TodoList({ todos }) {
 }
 
 function App() {
-  const [userData, setUserData] = useState(null)
+  const [token, setToken] = useAuth();
   const [todos, setTodos] = useState([]);
 
+  let navigate = useNavigate();
+
   function fetchTodos() {
-    api.todos.getAll(userData.token)
+    api.todos.getAll(token)
     .then(data => setTodos(data))
     .catch((err) => console.error(err))
   }
 
+  function navigateToList(data) {
+    setToken(data.token)
+    navigate('/todos')
+  }
+
   useEffect(() => {
-    if(userData?.token) {
+    if(token) {
       fetchTodos();
     }
-  }, [userData])
+  }, [token])
 
   console.log('Se renderiza')
 
@@ -46,31 +56,28 @@ function App() {
   // 3. Recibir respuesta y guardar el token
   // 4. Utilizar ese token para crear una tarea de ese mismo usuario
   // 4.1 - Necesitamos un endpoint "limitado" para ese usuario
-
-  // 1. Obtener info del usuario 
-  // 2. Registrar al usuario
-  // 3. Recibir respuesta y guardar el token
-  // 4. Utilizar ese token para crear una tarea de ese mismo usuario
-  // 4.1 - Necesitamos un endpoint "limitado" para ese usuario
-
+  
   return (
     <div className="App">
+      {token && <Navbar onCloseSession={() => setToken(null)} />}
       <header className="App-header">
-
-      {!userData && <SignUp onSignUp={(data) => setUserData(data)}/>}
-
-      {!userData &&
-        <Login onLogin={(data) => setUserData(data)}
-      />}
-
-      {userData &&
-        <CreateTodo
-        token={userData.token}
-        onCreateTodo={() => fetchTodos()}
-      />}
-
-      {userData && <TodoList todos={todos} />}
-
+        <Routes>
+          <Route path="/" element={<Navigate to="/todos" replace />} />
+          <Route path="/registro" element={<SignUp onSignUp={navigateToList} />} />
+          <Route path="/inicio" element={<SignIn onSignIn={navigateToList}/>} />
+          <Route path="/todos" element={ token ? (
+              <>
+                <CreateTodo 
+                  token={token}
+                  onCreateTodo={() => fetchTodos()}
+                />
+                <TodoList todos={todos} />
+              </>
+            ) : (
+              <Navigate to="/inicio" replace />
+            )
+          } />
+        </Routes>
       </header>
     </div>
   );
