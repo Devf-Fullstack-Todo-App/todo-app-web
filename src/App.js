@@ -5,6 +5,8 @@ import './App.css';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import CreateTodo from './components/CreateTodo';
+import Navbar from './components/Navbar';
+
 import api from './lib/api';
 import useAuth from './lib/hooks/useAuth';
 
@@ -57,6 +59,7 @@ function App() {
 
   return (
     <div className="App">
+      {token && <Navbar onCloseSession={() => setToken(null)} />}
       <header className="App-header">
         <Routes>
           <Route path="/" element={<Navigate to="/todos" replace />} />
