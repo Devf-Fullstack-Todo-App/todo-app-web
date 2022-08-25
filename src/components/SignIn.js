@@ -22,7 +22,6 @@ function SignIn(props) {
 
     api.users.login({ email, password})
     .then(data => {
-      console.log(data);
       setSuccess({ message: 'Usuario inició sesión con éxito' });
       setLoader(false);
       props.onSignIn(data);

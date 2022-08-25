@@ -6,6 +6,7 @@ import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import CreateTodo from './components/CreateTodo';
 import api from './lib/api';
+import useAuth from './lib/hooks/useAuth';
 
 function Todo(props) {
   return (
@@ -24,27 +25,27 @@ function TodoList({ todos }) {
 }
 
 function App() {
-  const [userData, setUserData] = useState(null);
+  const [token, setToken] = useAuth();
   const [todos, setTodos] = useState([]);
 
   let navigate = useNavigate();
 
   function fetchTodos() {
-    api.todos.getAll(userData.token)
+    api.todos.getAll(token)
     .then(data => setTodos(data))
     .catch((err) => console.error(err))
   }
 
   function navigateToList(data) {
-    setUserData(data)
+    setToken(data.token)
     navigate('/todos')
   }
 
   useEffect(() => {
-    if(userData?.token) {
+    if(token) {
       fetchTodos();
     }
-  }, [userData])
+  }, [token])
 
   console.log('Se renderiza')
 
@@ -61,10 +62,10 @@ function App() {
           <Route path="/" element={<Navigate to="/todos" replace />} />
           <Route path="/registro" element={<SignUp onSignUp={navigateToList} />} />
           <Route path="/inicio" element={<SignIn onSignIn={navigateToList}/>} />
-          <Route path="/todos" element={ userData ? (
+          <Route path="/todos" element={ token ? (
               <>
                 <CreateTodo 
-                  token={userData.token}
+                  token={token}
                   onCreateTodo={() => fetchTodos()}
                 />
                 <TodoList todos={todos} />

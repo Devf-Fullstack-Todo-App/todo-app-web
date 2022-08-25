@@ -24,7 +24,6 @@ function SignUp(props) {
 
     api.users.create({ email, password, name, phone })
     .then(data => {
-      console.log(data);
       setSuccess({ message: 'Usuario registrado con éxito' });
       setLoader(false);
       props.onSignUp(data);

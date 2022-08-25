@@ -11,7 +11,6 @@ function CreateTodo(props) {
       userToken: props.token, 
       userId: props.userId 
     }).then((data) => {
-        console.log(data);
       setTodo('');
       props.onCreateTodo()
     })
