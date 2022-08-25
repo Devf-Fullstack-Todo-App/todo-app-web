@@ -1,15 +1,15 @@
-.SignUp {
+.SignIn {
   background-color: white;
   border-radius: 5px;
   padding: 16px;
 }
 
-.SignUp .SignUp-form {
+.SignIn .SignIn-form {
   display: flex;
   flex-direction: column;
 }
 
-.SignUp .SignUp-title {
+.SignIn .SignIn-title {
   color: black;
   font-weight: bold;
   font-size: 24px;
@@ -17,7 +17,7 @@
   margin-bottom: 32px;
 }
 
-.SignUp .SignUp-input {
+.SignIn .SignIn-input {
   margin-bottom: 16px;
   padding: 8px;
   border-radius: 5px;
@@ -26,11 +26,11 @@
   border-width: 1px;
 }
 
-.SignUp .SignUp-input:last-of-type {
+.SignIn .SignIn-input:last-of-type {
   margin-bottom: 32px;
 }
 
-.SignUp .SignUp-button { 
+.SignIn .SignIn-button { 
   cursor: pointer;
   padding: 8px;
   border-radius: 5px;
@@ -39,12 +39,12 @@
   margin-bottom: 1rem;
 }
 
-.SignUp .SignUp-error { 
+.SignIn .SignIn-error { 
   color: red;
   font-size: 0.75rem;
 }
 
-.SignUp .SignUp-success { 
+.SignIn .SignIn-success { 
   color: green;
   font-size: 0.75rem;
 }

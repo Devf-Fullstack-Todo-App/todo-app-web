@@ -16,12 +16,6 @@ function SignUp(props) {
   
   const onRegisterHandler = () => {
     setLoader(true)
-    console.log({ 
-      email,
-      password,
-      name,
-      phone
-    })
     if (!email || !password || !name || !phone) {
       setError({ message: 'Se necesitan todos campos'})
       setLoader(false)
@@ -84,9 +78,11 @@ function SignUp(props) {
           type="button"
           className="SignUp-button"
           onClick={onRegisterHandler}
-        >{loader ? 'Cargando...' : 'Registrarse'}</button>
+        >
+        {loader ? 'Cargando...' : 'Registrarse'}</button>
         {error && <p className="SignUp-error">{error.message}</p>}
         {success && <p className="SignUp-success">{success.message}</p>}
+        <button type="button" onClick={props.onNavigateToSignIn}>Ya tienes cuenta? Inicia sesión</button>
       </form>
     </div>
   )

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
 import CreateTodo from './components/CreateTodo';
 import api from './lib/api';
 
@@ -22,8 +23,8 @@ function TodoList({ todos }) {
 }
 
 function App() {
-  const [userData, setUserData] = useState(null)
-
+  const [userData, setUserData] = useState(null);
+  const [onSignIn, setOnSignIn] = useState(false);
   const [todos, setTodos] = useState([]);
 
   function fetchTodos() {
@@ -49,7 +50,18 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {!userData && <SignUp onSignUp={(data) => setUserData(data)}/>}
+        {!userData && !onSignIn && (
+          <SignUp 
+            onSignUp={(data) => setUserData(data)} 
+            onNavigateToSignIn={() => setOnSignIn(true)} 
+          />
+        )}
+        {!userData && onSignIn && (
+          <SignIn 
+            onSignIn={(data) => setUserData(data)} 
+            onNavigateToSignUp={() => setOnSignIn(false)} 
+          />
+        )}
         {userData && (
           <CreateTodo 
             token={userData.token}
