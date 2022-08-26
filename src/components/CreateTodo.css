@@ -1,0 +1,9 @@
+.CreateTodo { 
+  width: 400px;
+}
+
+.CreateTodo .CreateTodo__btn { 
+  background-color: #27ae60;
+  color: white;
+  border: 1px solid #27ae60;
+}
