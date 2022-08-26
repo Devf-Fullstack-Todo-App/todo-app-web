@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './TodoList.css';
 
 import api from '../lib/api';
 
@@ -11,7 +12,15 @@ function TodoList({ token }) {
   function fetchTodos() {
     api.todos.getAll(token)
     .then(data => setTodos(data))
-    .catch((err) => console.error(err))
+    .catch((err) => console.error(err)) // TODO: manejar error correctamente
+  }
+
+  function toggleTodo(todoId, todoCompleted) { 
+    api.todos.update(todoId, {
+      completed: todoCompleted
+    }, token)
+    .then(() => fetchTodos())
+    .catch((err) => console.error(err)) // TODO: manejar error correctamente
   }
 
   useEffect(() => {
@@ -26,9 +35,18 @@ function TodoList({ token }) {
         token={token}
         onCreateTodo={() => fetchTodos()}
       />
-      <div>
-        <ul>
-          {todos.map((todo) => <Todo key={todo.id}>{todo.todo}</Todo>)}
+      <div className="TodoList">
+        <ul className="TodoList__container">
+          {todos.map((todo) => (
+              <Todo 
+                key={todo.id} 
+                onToggle={() => toggleTodo(todo.id, !todo.completed)}
+                completed={todo.completed}
+              >
+                {todo.todo}
+              </Todo>
+            ))
+          }
         </ul>
       </div>
     </>

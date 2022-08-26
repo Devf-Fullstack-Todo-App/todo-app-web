@@ -1,0 +1,8 @@
+.TodoList { 
+
+}
+
+.TodoList .TodoList__container { 
+  list-style-type: none;
+  padding: 0;
+}
