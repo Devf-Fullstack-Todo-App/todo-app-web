@@ -82,6 +82,18 @@ function updateTodo(todoId, todoChange, token) {
   .then((res) => res.json())
 }
 
+function deleteTodo(todoId, token) { 
+  const config = {
+      method: 'DELETE', 
+      headers: {
+          'Authorization': `Bearer ${token}`
+      }
+  }
+  
+  return fetch(`http://localhost:8000/todos/${todoId}`, config)
+  .then((res) => res.json())
+}
+
 const api = {
   users: {
     create: createUser,
@@ -91,6 +103,7 @@ const api = {
     create: createTodo,
     getAll: fetchTodos,
     update: updateTodo,
+    delete: deleteTodo,
   }
 }
 

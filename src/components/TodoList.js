@@ -23,6 +23,12 @@ function TodoList({ token }) {
     .catch((err) => console.error(err)) // TODO: manejar error correctamente
   }
 
+  function deleteTodo(todoId) {
+    api.todos.delete(todoId, token)
+      .then(() => fetchTodos())
+      .catch((err) => console.error(err)) // TODO: manejar error correctamente
+  }
+
   useEffect(() => {
     if(token) {
       fetchTodos();
@@ -41,6 +47,7 @@ function TodoList({ token }) {
               <Todo 
                 key={todo.id} 
                 onToggle={() => toggleTodo(todo.id, !todo.completed)}
+                onDelete={() => deleteTodo(todo.id)}
                 completed={todo.completed}
               >
                 {todo.todo}

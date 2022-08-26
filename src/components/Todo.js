@@ -3,8 +3,9 @@ import './Todo.css';
 
 function Todo(props) {
   return (
-    <li onClick={props.onToggle} className={`Todo ${props.completed ? 'Todo--completed' : ''}`}>
-      {props.children}
+    <li className={`Todo ${props.completed ? 'Todo--completed' : ''}`}>
+      <span className="Todo__text" onClick={props.onToggle}>{props.children}</span>
+      <button className="Todo__delete-btn" onClick={props.onDelete}>X</button>
     </li>
   )
 }

@@ -3,13 +3,34 @@
     background: white;
     margin-bottom: 0.5rem;
     color: black;
-    padding: 0.5rem;
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
 }
 
 .Todo--completed { 
   text-decoration: line-through;
   opacity: 0.5;
+}
+
+.Todo .Todo__text { 
+  margin-right: 1rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.Todo .Todo__delete-btn { 
+  background: orange;
+  color: black;
+  cursor: pointer;
+  padding: 0.5rem;
+  border: none;
+  width: 2rem;
+  font-weight: bold;
+}
+.Todo .Todo__delete-btn:hover { 
+  background-color: red;
 }
