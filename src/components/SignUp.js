@@ -85,7 +85,7 @@ function SignUp(props) {
         {error && <p className="SignUp-error">{error.message}</p>}
         {success && <p className="SignUp-success">{success.message}</p>}
 
-        <Link to="/inicio">Ya tienes cuenta? Inicia sesión</Link>
+        <Link to="/inicio" className='SignUp-Link'>Ya tienes cuenta? Inicia sesión</Link>
       </form>
     </div>
   )

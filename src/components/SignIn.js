@@ -62,7 +62,7 @@ function SignIn(props) {
         {loader ? 'Cargando...' : 'Iniciar sesión'}</button>
         {error && <p className="SignIn-error">{error.message}</p>}
         {success && <p className="SignIn-success">{success.message}</p>}
-        <Link to="/registro">No tienes cuenta? Registrate</Link>
+        <Link to="/registro" className='SignIn-Link'>No tienes cuenta? Registrate</Link>
       </form>
     </div>
   )

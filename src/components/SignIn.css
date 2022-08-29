@@ -24,6 +24,7 @@
   min-width: 250px;
   border-color: black;
   border-width: 1px;
+  font-size: 24px;
 }
 
 .SignIn .SignIn-input:last-of-type {
@@ -37,6 +38,25 @@
   border-color: black;
   border-width: 1px;
   margin-bottom: 1rem;
+  font-size: 24px;
+  transition: all 0.6s ease-in-out;
+}
+
+.SignIn .SignIn-button:hover {
+  opacity: 0.5;
+  background: black;
+  color: white;
+}
+
+.SignIn .SignIn-Link {
+  text-decoration: none;
+  color: gray;
+  transition: all 0.4s ease-in-out;
+}
+
+.SignIn .SignIn-Link:hover {
+  color: black;
+  text-decoration-line: underline;
 }
 
 .SignIn .SignIn-error { 
