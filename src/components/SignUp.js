@@ -74,14 +74,17 @@ function SignUp(props) {
             setPhone(e.target.value)
           }} 
         />
+
         <button
           type="button"
           className="SignUp-button"
           onClick={onRegisterHandler}
         >
         {loader ? 'Cargando...' : 'Registrarse'}</button>
+
         {error && <p className="SignUp-error">{error.message}</p>}
         {success && <p className="SignUp-success">{success.message}</p>}
+
         <Link to="/inicio">Ya tienes cuenta? Inicia sesión</Link>
       </form>
     </div>

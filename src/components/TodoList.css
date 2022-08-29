@@ -1,0 +1,8 @@
+.TodoList { 
+  width: 400px;
+}
+
+.TodoList .TodoList__container { 
+  list-style-type: none;
+  padding: 0;
+}

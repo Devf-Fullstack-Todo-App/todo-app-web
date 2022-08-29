@@ -48,3 +48,9 @@
   color: green;
   font-size: 0.75rem;
 }
+
+.SignUp a {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}

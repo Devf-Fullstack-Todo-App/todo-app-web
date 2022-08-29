@@ -66,6 +66,34 @@ function signInUser({ email, password }) {
   .then((res) => res.json())
 }
 
+function updateTodo(todoId, todoChange, token) {
+  const body = { ...todoChange }
+  
+  const config = {
+      method: 'PATCH', 
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(body)
+  }
+  
+  return fetch(`http://localhost:8000/todos/${todoId}`, config)
+  .then((res) => res.json())
+}
+
+function deleteTodo(todoId, token) { 
+  const config = {
+      method: 'DELETE', 
+      headers: {
+          'Authorization': `Bearer ${token}`
+      }
+  }
+  
+  return fetch(`http://localhost:8000/todos/${todoId}`, config)
+  .then((res) => res.json())
+}
+
 const api = {
   users: {
     create: createUser,
@@ -74,6 +102,8 @@ const api = {
   todos: {
     create: createTodo,
     getAll: fetchTodos,
+    update: updateTodo,
+    delete: deleteTodo,
   }
 }
 
