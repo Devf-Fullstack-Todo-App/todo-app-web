@@ -16,39 +16,44 @@ text-decoration: line-through;
 opacity: 0.5;
 }
 
+.Todo .Todo__edit-input {
+width: 100%;
+border: none;
+margin-right: 1rem;
+padding: 0.5rem;
+opacity: 0.6;
+}
+.Todo .Todo__edit-input:focus {
+outline: none;
+}
+
 .Todo .Todo__text { 
 margin-right: 1rem;
 padding: 0.5rem;
 width: 100%;
 }
 
-.Todo .Todo--edit {
-  color: red;
-  overflow: hidden;
+.Todo .btn:hover { 
+box-shadow: none;
+}
+.Todo .btn:click { 
+box-shadow: none;
 }
 
-.Todo .Todo__edit-btn {
-  cursor: pointer;
-  border: none;
-  width: 4rem;
-  padding: 0.5rem;
-  color: black;
-  transition: all ease 0.5s;
-}
-
-.Todo .Todo__edit-btn:hover {
-  background: greenyellow;
-}
-
-.Todo .Todo__delete-btn { 
-background: orange;
-color: black;
-cursor: pointer;
-padding: 0.5rem;
+.Todo .Todo__edit-btn { 
 border: none;
-width: 2rem;
-font-weight: bold;
+border-radius: 0;
+outline: none;
+box-shadow: none;
+}
+.Todo .Todo__delete-btn { 
+border: none;
+border-radius: 0;
+outline: none;
+box-shadow: none;
+}
+/* 
 }
 .Todo .Todo__delete-btn:hover { 
-  background-color: red;
-}
+background-color: red;
+} */

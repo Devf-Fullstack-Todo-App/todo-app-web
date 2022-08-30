@@ -29,9 +29,9 @@ function TodoList({ token }) {
       .catch((err) => console.error(err)) // TODO: manejar error correctamente
   }
 
-  function editTodo(todoId, todoEdit) {
+  function editTodo(todoId, newTodoText) {
     api.todos.update(todoId, {
-      todo: todoEdit
+      todo: newTodoText
     }, token)
     .then(() => fetchTodos())
     .catch((err) => console.error(err)) // TODO: manejar error correctamente
@@ -57,7 +57,11 @@ function TodoList({ token }) {
                 onToggle={() => toggleTodo(todo.id, !todo.completed)}
                 onDelete={() => deleteTodo(todo.id)}
                 completed={todo.completed}
-                editTodo={() => editTodo(todo.id, todo.todo)}
+                onSaveChange={(change) => {
+                  if (change !== todo.todo) {
+                    editTodo(todo.id, change)
+                  }
+                }}
               >
                 {todo.todo}
               </Todo>
