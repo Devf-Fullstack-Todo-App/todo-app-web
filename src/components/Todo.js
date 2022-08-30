@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import * as Icon from 'react-bootstrap-icons';
 import './Todo.css';
 
 function useOutsideAlerter(ref, isEditing, callback) {
@@ -73,11 +74,11 @@ function Todo(props) {
             handleEditFocus();
           }
         }}
-      >{isEditing ? '💾': '📝'}</button>
+      >{isEditing ? <Icon.Save />: <Icon.PencilFill />}</button>
       <button 
         className="Todo__delete-btn btn btn-danger" 
         onClick={props.onDelete}
-      >🗑</button>
+      ><Icon.TrashFill /></button>
     </li>
   )
 }
