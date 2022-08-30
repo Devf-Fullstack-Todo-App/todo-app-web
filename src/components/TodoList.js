@@ -16,17 +16,64 @@ function TodoList({ token }) {
   }
 
   function toggleTodo(todoId, todoCompleted) { 
+    let temporalTodo = null
+    const updatedTodos = todos.map(todo => {
+      if (todoId === todo.id) {
+        temporalTodo = todo;
+        return { ...todo, completed: todoCompleted } 
+      }
+      return todo;
+    })
+    setTodos(updatedTodos)
+
     api.todos.update(todoId, {
       completed: todoCompleted
     }, token)
-    .then(() => fetchTodos())
-    .catch((err) => console.error(err)) // TODO: manejar error correctamente
+    .then((updatedTodo) => {
+      const updatedTodos = todos.map(todo => {
+        if (todo.id === updatedTodo.id) {
+          return updatedTodo
+        }
+        return todo;
+      }) 
+      setTodos(updatedTodos)
+    })
+    .catch((err) => {
+      const uodatedTodos = todos.map(todo => {
+        if (todoId === todo.id) {
+          return { ...temporalTodo }
+        }
+        return todo;
+      })
+      setTodos(uodatedTodos)
+
+      console.error(err)
+    })
   }
 
   function deleteTodo(todoId) {
+    let temporalTodo = null
+    const deletedTodos = todos.map(todo => {
+      if (todoId === todo.id) {
+        return todo;
+      }
+      return todo;
+    })
+    setTodos(deletedTodos)
+
     api.todos.delete(todoId, token)
-      .then(() => fetchTodos())
-      .catch((err) => console.error(err)) // TODO: manejar error correctamente
+    .then(() => fetchTodos())
+    .catch((err) => {
+      const deletedTodos = todos.map(todo => {
+        if (todoId === todo.id) {
+          return { ...temporalTodo }
+        }
+        return todo;
+      })
+      setTodos(deletedTodos)
+
+      console.error(err)
+    })
   }
 
   function editTodo(todoId, newTodoText) {
