@@ -11,16 +11,47 @@ function TodoList({ token }) {
 
   function fetchTodos() {
     api.todos.getAll(token)
-    .then(data => setTodos(data))
+    .then(data => {
+      setTodos(data)
+    })
     .catch((err) => console.error(err)) // TODO: manejar error correctamente
   }
 
-  function toggleTodo(todoId, todoCompleted) { 
+  function toggleTodo(todoId, todoCompleted) {
+    let temporalTodo = null;
+    const updatedTodos = todos.map(todo => {
+      if (todoId === todo.id) {
+        temporalTodo = todo;
+        return {...todo, completed: todoCompleted }
+      }
+      return todo;
+    })
+    setTodos(updatedTodos)
+
     api.todos.update(todoId, {
       completed: todoCompleted
     }, token)
-    .then(() => fetchTodos())
-    .catch((err) => console.error(err)) // TODO: manejar error correctamente
+    .then((updatedTodo) => {
+      const updatedTodos = todos.map(todo => {
+        if (todo.id === updatedTodo.id) {
+          return updatedTodo
+        }
+        return todo;
+      })
+      setTodos(updatedTodos)
+    })
+    .catch((err) => {
+      const updatedTodos = todos.map(todo => {
+        if (todoId === todo.id) {
+          return { ...temporalTodo }
+        }
+        return todo;
+      })
+      setTodos(updatedTodos)
+      
+      // Lo que sea que deba pasar con el error
+      console.error(err)
+    })
   }
 
   function deleteTodo(todoId) {
