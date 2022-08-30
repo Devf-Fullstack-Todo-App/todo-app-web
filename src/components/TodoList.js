@@ -29,6 +29,14 @@ function TodoList({ token }) {
       .catch((err) => console.error(err)) // TODO: manejar error correctamente
   }
 
+  function editTodo(todoId, newTodoText) {
+    api.todos.update(todoId, {
+      todo: newTodoText
+    }, token)
+    .then(() => fetchTodos())
+    .catch((err) => console.error(err)) // TODO: manejar error correctamente
+  }
+
   useEffect(() => {
     if(token) {
       fetchTodos();
@@ -49,6 +57,11 @@ function TodoList({ token }) {
                 onToggle={() => toggleTodo(todo.id, !todo.completed)}
                 onDelete={() => deleteTodo(todo.id)}
                 completed={todo.completed}
+                onSaveChange={(change) => {
+                  if (change !== todo.todo) {
+                    editTodo(todo.id, change)
+                  }
+                }}
               >
                 {todo.todo}
               </Todo>
