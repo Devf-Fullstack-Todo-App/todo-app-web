@@ -1,3 +1,9 @@
+const { REACT_APP_API_URL } = process.env;
+
+if (!REACT_APP_API_URL) {
+  throw new Error('missing REACT_APP_API_URL value');
+}
+
 function createUser({ email, password, name, phone }) { 
   const body = {
     email,
@@ -14,7 +20,7 @@ function createUser({ email, password, name, phone }) {
     body: JSON.stringify(body)
   }
 
-  return fetch('http://localhost:8000/users', config)
+  return fetch(`${REACT_APP_API_URL}/users`, config)
   .then(res => res.json())
 }
 
@@ -32,7 +38,7 @@ function createTodo({ todo, userToken }) {
       body: JSON.stringify(body)
   }
   
-  return fetch(`http://localhost:8000/todos`, config)
+  return fetch(`${REACT_APP_API_URL}/todos`, config)
   .then((res) => res.json())
 }
 
@@ -44,7 +50,7 @@ function fetchTodos(token) {
       }
   }
   
-  return fetch(`http://localhost:8000/todos`, config)
+  return fetch(`${REACT_APP_API_URL}/todos`, config)
   .then((res) => res.json())
 }
 
@@ -62,7 +68,7 @@ function signInUser({ email, password }) {
       body: JSON.stringify(body)
   }
   
-  return fetch(`http://localhost:8000/auth/login`, config)
+  return fetch(`${REACT_APP_API_URL}/auth/login`, config)
   .then((res) => res.json())
 }
 
@@ -78,7 +84,7 @@ function updateTodo(todoId, todoChange, token) {
       body: JSON.stringify(body)
   }
   
-  return fetch(`http://localhost:8000/todos/${todoId}`, config)
+  return fetch(`${REACT_APP_API_URL}/todos/${todoId}`, config)
   .then((res) => res.json())
 }
 
@@ -90,7 +96,7 @@ function deleteTodo(todoId, token) {
       }
   }
   
-  return fetch(`http://localhost:8000/todos/${todoId}`, config)
+  return fetch(`${REACT_APP_API_URL}/todos/${todoId}`, config)
   .then((res) => res.json())
 }
 
@@ -102,7 +108,7 @@ function refreshToken(token) {
     }
   }
 
-  return fetch(`http://localhost:8000/auth/refresh`, config).then(res => res.json());
+  return fetch(`${REACT_APP_API_URL}/auth/refresh`, config).then(res => res.json());
 }
 
 const api = {
