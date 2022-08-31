@@ -35,7 +35,7 @@ function SignIn(props) {
   return (
     <div className="SignIn">
       <form className="SignIn-form">
-        <h1 className="SignIn-title">Inicia sesión</h1>
+        <h1 className="SignIn-title">Inicia sesión 🚀</h1>
         <input 
           className="SignIn-input"
           placeholder="Ingresa tu email"
