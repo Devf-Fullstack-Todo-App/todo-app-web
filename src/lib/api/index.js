@@ -94,6 +94,17 @@ function deleteTodo(todoId, token) {
   .then((res) => res.json())
 }
 
+function refreshToken(token) { 
+  const config = {
+    'method': 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  }
+
+  return fetch(`http://localhost:8000/auth/refresh`, config).then(res => res.json());
+}
+
 const api = {
   users: {
     create: createUser,
@@ -104,6 +115,9 @@ const api = {
     getAll: fetchTodos,
     update: updateTodo,
     delete: deleteTodo,
+  }, 
+  auth: {
+    refresh: refreshToken
   }
 }
 
