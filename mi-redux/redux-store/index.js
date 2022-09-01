@@ -52,7 +52,24 @@ function todos(state = [], action) {
   return state;
 }
 
-const nuevoStore = createStore(todos);
+function goals(state = [], action) {
+  switch(action.type) {
+    case 'ADD_GOAL': 
+      return state.concat([action.goal])
+    case 'REMOVE_GOAL':
+      return state.filter((goal) => goal.id !== action.goal_id)
+    default: return state;
+  }
+}
+
+function rootReducer(state = {}, action) {
+  return {
+    todos: todos(state.todos, action),
+    goals: goals(state.goals, action)
+  }
+}
+
+const nuevoStore = createStore(rootReducer);
 
 const unsubscribe = nuevoStore.subscribe(() => console.log('cambio el estado'))
 unsubscribe();
@@ -101,4 +118,25 @@ nuevoStore.dispatch({
 nuevoStore.dispatch({
   type: 'TOGGLE_TODO',
   todo_id: 0
+})
+
+nuevoStore.dispatch({ 
+  type: 'ADD_GOAL', 
+  goal: {
+    id: 0,
+    name: 'Obtener mi primer trabajo como developer'
+  }
+})
+
+nuevoStore.dispatch({ 
+  type: 'ADD_GOAL', 
+  goal: {
+    id: 1,
+    name: 'Llegar a mi peso ideal'
+  }
+})
+
+nuevoStore.dispatch({ 
+  type: 'REMOVE_GOAL', 
+  goal_id: 1
 })
