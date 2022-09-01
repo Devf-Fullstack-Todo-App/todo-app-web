@@ -40,9 +40,14 @@ function todos(state = [], action) {
   }
   if (action.type === 'DELETE_TODO') {
     // Proceso para eliminar el todo
+    return state.filter(todo => todo.id !== action.todo_id)
   }
   if (action.type === 'EDIT_TODO') {
-    // Proces para editar un todo
+    // Proceso para editar un todo
+  }
+  if (action.type === 'TOGGLE_TODO') {
+    return state.map((todo) => todo.id !== action.todo_id ? todo : 
+    { ...todo, completed: !todo.completed })
   }
   return state;
 }
@@ -50,13 +55,50 @@ function todos(state = [], action) {
 const nuevoStore = createStore(todos);
 
 const unsubscribe = nuevoStore.subscribe(() => console.log('cambio el estado'))
-
-console.log(nuevoStore.getState())
-
-nuevoStore.dispatch({ type: 'ADD_TODO', todo: 'Aprender Redux' })
-nuevoStore.dispatch({ type: 'ADD_TODO', todo: 'Aprender Context' })
-nuevoStore.dispatch({ type: 'ADD_TODO', todo: 'Aprender Java' })
-
-console.log(nuevoStore.getState())
-
 unsubscribe();
+const unsubscribeLogger = nuevoStore.subscribe(() => {
+  console.log('El nuevo estado es:')
+  console.log(nuevoStore.getState())
+})
+
+nuevoStore.dispatch({ 
+    type: 'ADD_TODO', 
+    todo: {
+      id: 0,
+      name: 'Aprender Redux',
+      completed: false
+    } 
+})
+
+nuevoStore.dispatch({ 
+  type: 'ADD_TODO', 
+  todo: {
+    id: 1,
+    name: 'Aprender Express.js',
+    completed: false
+  } 
+})
+
+nuevoStore.dispatch({ 
+  type: 'ADD_TODO', 
+  todo: {
+    id: 2,
+    name: 'Aprender Java',
+    completed: false
+  } 
+})
+
+nuevoStore.dispatch({
+  type: 'DELETE_TODO',
+  todo_id: 1
+})
+
+nuevoStore.dispatch({
+  type: 'TOGGLE_TODO',
+  todo_id: 2
+})
+
+nuevoStore.dispatch({
+  type: 'TOGGLE_TODO',
+  todo_id: 0
+})
