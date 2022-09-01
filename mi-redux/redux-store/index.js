@@ -32,20 +32,29 @@ function createStore(reducer) {
   return store;
 }
 
+// Action Types
+const ADD_TODO = 'ADD_TODO';
+const DELETE_TODO = 'DELETE_TODO';
+const EDIT_TODO = 'EDIT_TODO';
+const TOGGLE_TODO = 'TOGGLE_TODO';
+
+const ADD_GOAL = 'ADD_GOAL';
+const REMOVE_GOAL = 'REMOVE_GOAL';
+
 // Reducer
 function todos(state = [], action) {
-  if (action.type === 'ADD_TODO') {
+  if (action.type === ADD_TODO) {
     // Proceso para regresar el estado con ese todo nuevo
     return state.concat([action.todo])
   }
-  if (action.type === 'DELETE_TODO') {
+  if (action.type === DELETE_TODO) {
     // Proceso para eliminar el todo
     return state.filter(todo => todo.id !== action.todo_id)
   }
-  if (action.type === 'EDIT_TODO') {
+  if (action.type === EDIT_TODO) {
     // Proceso para editar un todo
   }
-  if (action.type === 'TOGGLE_TODO') {
+  if (action.type === TOGGLE_TODO) {
     return state.map((todo) => todo.id !== action.todo_id ? todo : 
     { ...todo, completed: !todo.completed })
   }
@@ -54,9 +63,9 @@ function todos(state = [], action) {
 
 function goals(state = [], action) {
   switch(action.type) {
-    case 'ADD_GOAL': 
+    case ADD_GOAL: 
       return state.concat([action.goal])
-    case 'REMOVE_GOAL':
+    case REMOVE_GOAL:
       return state.filter((goal) => goal.id !== action.goal_id)
     default: return state;
   }
@@ -78,50 +87,45 @@ const unsubscribeLogger = nuevoStore.subscribe(() => {
   console.log(nuevoStore.getState())
 })
 
-nuevoStore.dispatch({ 
-    type: 'ADD_TODO', 
+// Action Creators
+function addTodoAction(todo) {
+  return {
+    type: ADD_TODO,
     todo: {
-      id: 0,
-      name: 'Aprender Redux',
+      id: new Date().getTime(),
+      todo,
       completed: false
-    } 
-})
+    }
+  }
+}
 
-nuevoStore.dispatch({ 
-  type: 'ADD_TODO', 
-  todo: {
-    id: 1,
-    name: 'Aprender Express.js',
-    completed: false
-  } 
-})
+function deleteTodoAction(todoId) {
+  return {
+    type: DELETE_TODO,
+    todo_id: todoId
+  }
+}
 
-nuevoStore.dispatch({ 
-  type: 'ADD_TODO', 
-  todo: {
-    id: 2,
-    name: 'Aprender Java',
-    completed: false
-  } 
-})
+function toggleTodoAction(todoId) {
+  return {
+    type: TOGGLE_TODO,
+    todo_id: todoId
+  }
+}
 
-nuevoStore.dispatch({
-  type: 'DELETE_TODO',
-  todo_id: 1
-})
+nuevoStore.dispatch(addTodoAction('Aprender Redux'))
+nuevoStore.dispatch(addTodoAction('Aprender Node.js'))
+nuevoStore.dispatch(addTodoAction('Aprender Java'))
+nuevoStore.dispatch(deleteTodoAction(34))
+nuevoStore.dispatch(toggleTodoAction(23))
 
 nuevoStore.dispatch({
-  type: 'TOGGLE_TODO',
-  todo_id: 2
-})
-
-nuevoStore.dispatch({
-  type: 'TOGGLE_TODO',
+  type: TOGGLE_TODO,
   todo_id: 0
 })
 
 nuevoStore.dispatch({ 
-  type: 'ADD_GOAL', 
+  type: ADD_GOAL, 
   goal: {
     id: 0,
     name: 'Obtener mi primer trabajo como developer'
@@ -129,7 +133,7 @@ nuevoStore.dispatch({
 })
 
 nuevoStore.dispatch({ 
-  type: 'ADD_GOAL', 
+  type: ADD_GOAL, 
   goal: {
     id: 1,
     name: 'Llegar a mi peso ideal'
@@ -137,6 +141,6 @@ nuevoStore.dispatch({
 })
 
 nuevoStore.dispatch({ 
-  type: 'REMOVE_GOAL', 
+  type: REMOVE_GOAL, 
   goal_id: 1
 })
